@@ -1,0 +1,106 @@
+:root {
+  --primaryColor: #fff;
+  --secondaryColor: #777;
+  --boxShadowColor: rgba(0, 0, 0, 0.5);
+  --bgColor: #f9fafb;
+  --greenColor: #2ecc71;
+  --redColor: #e74c3c;
+  --blueColor: #3498db;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(---bgColor);
+}
+
+.container {
+  background-color: var(--primaryColor);
+  border-radius: 0.5rem;
+  box-shadow: 4px 4px 12px var(--boxShadowColor),
+    -4px -4px 12px var(--primaryColor);
+  width: 400px;
+}
+
+h2 {
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.form {
+  padding: 30px 40px;
+}
+
+.form-control {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+label {
+  color: var(--secondaryColor);
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--secondaryColor);
+}
+
+.form-control.succes input {
+  border-color: var(--greenColor);
+}
+.form-control.error input {
+  border-color: var(--redColor);
+}
+
+.form-control small {
+  color: var(--redColor);
+  /* position: absolute; */
+  /* bottom: 0; */
+  /* left: 0; */
+  font-weight: 600;
+  text-transform: capitalize;
+  /* visibility: hidden; */
+  display: none;
+}
+
+.form-control.error small {
+  /* visibility: visible; */
+  display: block;
+}
+
+#btn-submit {
+  cursor: pointer;
+  background-color: var(--blueColor);
+  border: 2px solid var(--blueColor);
+  color: var(--primaryColor);
+  display: block;
+  font-size: 16px;
+  padding: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
