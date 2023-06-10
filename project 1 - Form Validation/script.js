@@ -20,60 +20,62 @@ const checkPassword = (password) => {
 
 // My script
 
-submit.addEventListener("click", () => {
-  formControls.forEach((form) => (form.className = "form-control"));
-  for (const input of inputs) {
-    if (input.value.trim() !== "") {
-      input.parentElement.classList.add("succes");
-    } else {
-      input.parentElement.classList.add("error");
-    }
-  }
+// submit.addEventListener("click", () => {
+//   formControls.forEach((form) => (form.className = "form-control"));
+//   for (const input of inputs) {
+//     if (input.value.trim() !== "") {
+//       input.parentElement.classList.add("succes");
+//     } else {
+//       input.parentElement.classList.add("error");
+//     }
+//   }
 
-  if (password.value !== password2.value) {
-    [password, password2].forEach((pass) =>
-      pass.parentElement.classList.add("error")
-    );
-    [password, password2].forEach(
-      (pass) =>
-        (pass.parentElement.querySelector("small").innerText =
-          "password not equal")
-    );
-  }
+//   if (password.value !== password2.value) {
+//     [password, password2].forEach((pass) =>
+//       pass.parentElement.classList.add("error")
+//     );
+//     [password, password2].forEach(
+//       (pass) =>
+//         (pass.parentElement.querySelector("small").innerText =
+//           "password not equal")
+//     );
+//   }
 
-  if (
-    password.value === password2.value &&
-    !checkPassword(password.value) &&
-    !checkPassword(password2.value)
-  ) {
-    [password, password2].forEach((pass) =>
-      pass.parentElement.classList.add("error")
-    );
-    [password, password2].forEach(
-      (pass) =>
-        (pass.parentElement.querySelector("small").innerText =
-          "the password must contain at least 1 lowercase and must contain at least 1 uppercase and must contain at least 1 numeric character and must contain at least one special character and must be at least 6 characters or longer")
-    );
-  }
+//   if (
+//     password.value === password2.value &&
+//     !checkPassword(password.value) &&
+//     !checkPassword(password2.value)
+//   ) {
+//     [password, password2].forEach((pass) =>
+//       pass.parentElement.classList.add("error")
+//     );
+//     [password, password2].forEach(
+//       (pass) =>
+//         (pass.parentElement.querySelector("small").innerText =
+//           "the password must contain at least 1 lowercase and must contain at least 1 uppercase and must contain at least 1 numeric character and must contain at least one special character and must be at least 6 characters or longer")
+//     );
+//   }
 
-  if (!emailIsValid(email.value) && email.value !== "") {
-    email.parentElement.classList.add("error");
-    email.parentElement.querySelector("small").innerText =
-      "email invalid Please enter a valid email";
-  }
-});
+//   if (!emailIsValid(email.value) && email.value !== "") {
+//     email.parentElement.classList.add("error");
+//     email.parentElement.querySelector("small").innerText =
+//       "email invalid Please enter a valid email";
+//   }
+// });
 
-const showError = (input, msgError) => {
-  const formControl = input.parentElement;
-  const small = formControl.querySelector("small");
-  formControl.className = "form-control error";
-  small.innerText = msgError;
-};
+// const showError = (input, msgError) => {
+//   const formControl = input.parentElement;
+//   const small = formControl.querySelector("small");
+//   formControl.className = "form-control error";
+//   small.innerText = msgError;
+// };
 
-const ShowSucces = (input) => {
-  const formControl = input.parentElement;
-  formControl.className = "form-control succes";
-};
+// const ShowSucces = (input) => {
+//   const formControl = input.parentElement;
+//   formControl.className = "form-control succes";
+// };
+
+// first Solution
 
 // form.addEventListener("submit", (event) => {
 //   event.preventDefault();
@@ -110,3 +112,33 @@ const ShowSucces = (input) => {
 //     ShowSucces(password2)
 //   }
 // });
+
+// Second Solution
+
+const showError = (input, msgError) => {
+  const formControl = input.parentElement;
+  const small = formControl.querySelector("small");
+  formControl.className = "form-control error";
+  small.innerText = msgError;
+};
+
+const ShowSucces = (input) => {
+  const formControl = input.parentElement;
+  formControl.className = "form-control succes";
+};
+
+function checkRequired(inputArr) {
+  inputArr.forEach((input) => {
+    // console.log(input.value)
+    if (input.value.trim() === "") {
+      showError(input, `${input.id} is required`);
+    } else {
+      showSucces(input);
+    }
+  });
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  checkRequired([username, email, password, password2]);
+});
